@@ -1,0 +1,276 @@
+// prisma\schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model address {
+  address_id  BigInt   @id @default(autoincrement())
+  street      String   @db.VarChar(255)
+  postal_code String   @db.VarChar(255)
+  city        String   @db.VarChar(255)
+  country     String   @db.VarChar(255)
+  user_id     BigInt
+  user        user     @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "address_user_id_foreign")
+  order       order[]
+  seller      seller[]
+
+  @@index([user_id], map: "address_user_id_foreign")
+}
+
+model cartitem {
+  cart_item_id     BigInt       @id @default(autoincrement())
+  shopping_cart_id BigInt
+  product_id       BigInt
+  product          product      @relation(fields: [product_id], references: [product_id], onUpdate: Restrict, map: "cartitem_product_id_foreign")
+  shoppingcart     shoppingcart @relation(fields: [shopping_cart_id], references: [shopping_cart_id], onUpdate: Restrict, map: "cartitem_shopping_cart_id_foreign")
+
+  @@index([product_id], map: "cartitem_product_id_foreign")
+  @@index([shopping_cart_id], map: "cartitem_shopping_cart_id_foreign")
+}
+
+model category {
+  category_id         BigInt             @id @default(autoincrement())
+  category_name       String             @db.VarChar(255)
+  product_description String             @db.Text
+  product_category    product_category[]
+}
+
+model like {
+  like_id    BigInt  @id @default(autoincrement())
+  user_id    BigInt
+  product_id BigInt
+  product    product @relation(fields: [product_id], references: [product_id], onUpdate: Restrict, map: "like_product_id_foreign")
+  user       user    @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "like_user_id_foreign")
+
+  @@index([product_id], map: "like_product_id_foreign")
+  @@index([user_id], map: "like_user_id_foreign")
+}
+
+model order {
+  order_id     BigInt       @id @default(autoincrement())
+  date_order   DateTime     @db.DateTime(0)
+  status       order_status
+  total_amount Decimal      @db.Decimal(8, 2)
+  user_id      BigInt
+  address_id   BigInt
+  address      address      @relation(fields: [address_id], references: [address_id], onUpdate: Restrict, map: "order_address_id_foreign")
+  user         user         @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "order_user_id_foreign")
+  orderitem    orderitem[]
+  payment      payment[]
+  shipment     shipment[]
+
+  @@index([address_id], map: "order_address_id_foreign")
+  @@index([user_id], map: "order_user_id_foreign")
+}
+
+model orderitem {
+  order_item_id BigInt  @id @default(autoincrement())
+  product_id    BigInt
+  order_id      BigInt
+  quantity      Float
+  price_unit    Decimal @db.Decimal(8, 2)
+  seller_id     BigInt
+  order         order   @relation(fields: [order_id], references: [order_id], onUpdate: Restrict, map: "orderitem_order_id_foreign")
+  product       product @relation(fields: [product_id], references: [product_id], onUpdate: Restrict, map: "orderitem_product_id_foreign")
+  seller        seller  @relation(fields: [seller_id], references: [seller_id], onUpdate: Restrict, map: "orderitem_seller_id_foreign")
+
+  @@index([order_id], map: "orderitem_order_id_foreign")
+  @@index([product_id], map: "orderitem_product_id_foreign")
+  @@index([seller_id], map: "orderitem_seller_id_foreign")
+}
+
+model payment {
+  payment_id     BigInt                 @id @default(autoincrement())
+  amount         Float
+  payment_method payment_payment_method
+  status         payment_status
+  payment_date   DateTime               @db.DateTime(0)
+  order_id       BigInt
+  user_id        BigInt
+  order          order                  @relation(fields: [order_id], references: [order_id], onUpdate: Restrict, map: "payment_order_id_foreign")
+  user           user                   @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "payment_user_id_foreign")
+
+  @@index([order_id], map: "payment_order_id_foreign")
+  @@index([user_id], map: "payment_user_id_foreign")
+}
+
+model product {
+  product_id          BigInt             @id @default(autoincrement())
+  seller_id           BigInt
+  product_name        String             @db.VarChar(255)
+  product_description String             @db.Text
+  product_price       Float
+  product_stock       BigInt
+  created_at          DateTime           @db.DateTime(0)
+  cartitem            cartitem[]
+  like                like[]
+  orderitem           orderitem[]
+  seller              seller             @relation(fields: [seller_id], references: [seller_id], onUpdate: Restrict, map: "product_seller_id_foreign")
+  product_category    product_category[]
+  review              review[]
+
+  @@index([seller_id], map: "product_seller_id_foreign")
+}
+
+model product_category {
+  product_category_id BigInt   @id @default(autoincrement())
+  product_id          BigInt
+  category_id         BigInt
+  category            category @relation(fields: [category_id], references: [category_id], onUpdate: Restrict, map: "product_category_category_id_foreign")
+  product             product  @relation(fields: [product_id], references: [product_id], onUpdate: Restrict, map: "product_category_product_id_foreign")
+
+  @@index([category_id], map: "product_category_category_id_foreign")
+  @@index([product_id], map: "product_category_product_id_foreign")
+}
+
+model review {
+  review_id        BigInt        @id @default(autoincrement())
+  user_id          BigInt
+  product_id       BigInt
+  rating           review_rating
+  comment          String        @db.VarChar(255)
+  publication_date DateTime      @db.DateTime(0)
+  product          product       @relation(fields: [product_id], references: [product_id], onUpdate: Restrict, map: "review_product_id_foreign")
+  user             user          @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "review_user_id_foreign")
+
+  @@index([product_id], map: "review_product_id_foreign")
+  @@index([user_id], map: "review_user_id_foreign")
+}
+
+model seller {
+  seller_id          BigInt      @id @default(autoincrement())
+  address_id         BigInt
+  store_name         String      @db.VarChar(255)
+  contact_phone      String      @db.VarChar(255)
+  email_seller       String      @db.VarChar(255)
+  information_seller String      @db.VarChar(255)
+  orderitem          orderitem[]
+  product            product[]
+  address            address     @relation(fields: [address_id], references: [address_id], onUpdate: Restrict, map: "seller_address_id_foreign")
+  user               user[]
+
+  @@index([address_id], map: "seller_address_id_foreign")
+}
+
+model shipment {
+  shipment_id   BigInt                 @id @default(autoincrement())
+  shipment_date DateTime               @db.DateTime(0)
+  shipment_type shipment_shipment_type
+  status        shipment_status
+  order_id      BigInt
+  order         order                  @relation(fields: [order_id], references: [order_id], onUpdate: Restrict, map: "shipment_order_id_foreign")
+
+  @@index([order_id], map: "shipment_order_id_foreign")
+}
+
+model shoppingcart {
+  shopping_cart_id BigInt      @id @default(autoincrement())
+  created_at       DateTime    @db.DateTime(0)
+  user_id          BigInt
+  user_session_id  BigInt
+  cartitem         cartitem[]
+  user             user        @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "shoppingcart_user_id_foreign")
+  usersession      usersession @relation(fields: [user_session_id], references: [user_session_id], onUpdate: Restrict, map: "shoppingcart_user_session_id_foreign")
+
+  @@index([user_id], map: "shoppingcart_user_id_foreign")
+  @@index([user_session_id], map: "shoppingcart_user_session_id_foreign")
+}
+
+model user {
+  user_id      BigInt         @id @default(autoincrement())
+  username     String         @db.VarChar(255)
+  email        String         @db.VarChar(255)
+  password     String         @db.Text
+  role         user_role
+  address_id   BigInt
+  seller_id    BigInt?
+  address      address[]
+  like         like[]
+  order        order[]
+  payment      payment[]
+  review       review[]
+  shoppingcart shoppingcart[]
+  seller       seller?        @relation(fields: [seller_id], references: [seller_id], onDelete: Restrict, onUpdate: Restrict, map: "user_seller_id_foreign")
+  usersession  usersession[]
+
+  @@index([seller_id], map: "user_seller_id_foreign")
+}
+
+model usersession {
+  user_session_id BigInt         @id @default(autoincrement())
+  user_id         BigInt
+  refresh_token   BigInt
+  created_at      DateTime       @default(now()) @db.DateTime(0)
+  expires_at      DateTime       @db.DateTime(0)
+  shoppingcart    shoppingcart[]
+  user            user           @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "usersession_user_id_foreign")
+
+  @@index([user_id], map: "usersession_user_id_foreign")
+}
+
+enum order_status {
+  pending
+  processing
+  shipped
+  delivered
+  canceled
+  returned
+}
+
+enum payment_payment_method {
+  credit_card
+  cash
+  bank_transfer
+  paypal
+  bitcoin
+  cash_on_delivery
+}
+
+enum shipment_shipment_type {
+  standard
+  express
+  overnight
+}
+
+enum payment_status {
+  pending
+  completed
+  failed
+  refunded
+}
+
+enum review_rating {
+  ONE   @map("1")
+  TWO   @map("2")
+  THREE @map("3")
+  FOUR  @map("4")
+  FIVE  @map("5")
+}
+
+enum shipment_status {
+  pending
+  in_transit
+  delivered
+  canceled
+}
+
+enum user_role {
+  visitor
+  customer
+  seller
+  admin
+}
+
+model entity_table {
+    id Int @id @default(autoincrement())
+    field_1 String
+    field_2 Boolean @default(false)
+    field_3 Int
+    field_4 DateTime @default(now())
+}
