@@ -1,102 +1,215 @@
 <!-- README.md -->
 
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Spree Back
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<!-- > ![Project Logo](link-to-logo.png) -->
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+A robust, scalable, and modular backend for a modern e-commerce platform. Built with **NestJS** and **TypeScript**, Spree Back provides a fully-featured REST API that manages users, authentication, products, orders, payments, reviews, and more. Powered by **Prisma ORM** and MySQL, it supports advanced database relationships and implements best practices for maintainability, security, and developer experience.
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Table of Contents
 
-## Project setup
+- [Demo](#demo)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Running the Project](#running-the-project)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Testing](#testing)
+- [Deployment](#deployment)
+- [Environment Variables](#environment-variables)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
+- [Contact](#contact)
+
+---
+
+## Demo
+
+_No live demo yet._
+
+<!-- Optionally, add screenshots here if you have API playground screenshots, Swagger UI, or code samples. -->
+
+---
+
+## Tech Stack
+
+**Backend:**
+
+- **NestJS** (TypeScript)
+- **Express** (via Nest)
+- **Prisma ORM**
+
+**Database:**
+
+- **MySQL** <!-- (compatible with PostgreSQL/MongoDB if you adapt Prisma schema) -->
+
+**Testing:**
+
+- **Jest** (unit/e2e tests)
+- **Supertest** (API endpoint testing)
+
+**Tools & Dev Experience:**
+
+- **Docker** (optional, for development & deployment)
+- **Husky** (Git hooks)
+- **Commitlint** & **Commitizen** (Conventional commits)
+- **Prettier** & **ESLint** (code quality)
+- **GitHub Actions** (CI/CD support)
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (>=20.x)
+- MySQL Database (or compatible)
+- Docker (optional, for containerization)
+
+### Installation
 
 ```bash
-$ npm install
+git clone https://github.com/username/spree_back.git
+cd spree_back
+npm install
 ```
 
-## Compile and run the project
+---
+
+## Running the Project
+
+> **Start backend in development mode:**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
+> **Build for production:**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
+npm run start:prod
 ```
+
+> **Run database migrations and seed data:**
+
+```bash
+npm run prisma:migrate:dev
+npm run prisma:db:seed
+```
+
+---
+
+## Project Structure
+
+```
+├── src
+│   ├── main.ts          # Application entrypoint
+│   ├── app.module.ts    # Main NestJS module
+│   └── ...              # Feature modules & controllers
+├── prisma
+│   ├── schema.prisma    # Prisma schema (DB models)
+│   └── main.ts          # Seeder scripts
+├── test                 # Unit and e2e tests
+├── docs                 # Project & API docs
+├── .env.sample          # Environment variable sample
+├── package.json         # NPM configuration and scripts
+└── tsconfig.json        # TypeScript configuration
+```
+
+---
+
+## API Documentation
+
+The backend exposes a REST API for managing:
+
+- Users, authentication (sessions, roles, refresh tokens)
+- Products, categories, sellers, shopping carts
+- Orders, order items, payments, shipments
+- Product reviews, likes
+
+**See `/docs` for OpenAPI/Swagger documentation** (or link to API reference once generated).
+
+---
+
+## Testing
+
+Run the tests using:
+
+```bash
+npm test
+```
+
+- **Unit tests**: Validate logic of individual modules.
+- **e2e tests**: Validate API endpoints and integration.
+
+---
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+1. **Build and start in production mode:**
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+   ```bash
+   npm run build
+   npm run start:prod
+   ```
 
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+2. **Environment variables**: Copy `.env.sample` to `.env` and configure.
+3. Optionally, deploy with Docker (add `Dockerfile` and config as needed).
+
+---
+
+## Environment Variables
+
+Create a `.env` file at the project root:
+
+```env
+DATABASE_URL="mysql://johndoe:randompassword@localhost:3306/mydb"
+SKIP_CLEANUP=false
+FRONT_API_BASE_URL=http://localhost:3000
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+---
 
-## Resources
+## Contributing
 
-Check out a few resources that may come in handy when working with NestJS:
+Contributions are welcome! Please follow these steps:
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit changes (`git commit -m 'feat: add your feature'`)
+4. Push the branch (`git push origin feature/your-feature`)
+5. Create a Pull Request
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
 ## License
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+UNLICENSED (or specify if you choose MIT or another license)
 
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+---
+
+## Acknowledgements
+
+Special thanks to the following projects and contributors:
+
+- [NestJS](https://nestjs.com/)
+- [Prisma](https://www.prisma.io/)
+- [Jest](https://jestjs.io/)
+
+---
+
+## Contact
+
+Ange KOUAKOU - [your.email@example.com](mailto:your.email@example.com)
+
+[Project Link](https://github.com/username/spree_back)
+
+---
+
+### **Summary**
+
+This backend is a **modular e-commerce API** supporting complex business logic with clean architecture, CI/CD, and modern developer tooling. It’s ready to power production commerce or serve as a template for new SaaS projects.
