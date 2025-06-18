@@ -22,6 +22,5 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src/**/*", "prisma/**/*.ts", "test/**/*"]
+  }
 }

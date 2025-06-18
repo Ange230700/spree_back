@@ -33,8 +33,17 @@ export default tseslint.config(
         project: ['./tsconfig.json'],
       },
     },
-    plugins: { '@typescript-eslint': tseslint.plugin },
-    rules: {},
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
+    rules: { 'import/no-unresolved': 'error', 'import/order': 'warn' },
   },
   {
     plugins: { prettier: eslintPluginPrettier },

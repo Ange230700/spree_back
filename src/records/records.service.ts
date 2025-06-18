@@ -8,15 +8,17 @@ import { UpdateRecordDto } from '~/src/records/dto/update-record.dto';
 @Injectable()
 export class RecordsService {
   async create(createRecordDto: CreateRecordDto) {
-    return prisma.entity_table.create({ data: createRecordDto });
+    return await prisma.entity_table.create({ data: createRecordDto });
   }
 
   async findAll() {
-    return prisma.entity_table.findMany();
+    const records = await prisma.entity_table.findMany();
+    return records;
   }
 
   async findOne(id: number) {
-    return prisma.entity_table.findUnique({ where: { id } });
+    const record = await prisma.entity_table.findUnique({ where: { id } });
+    return record;
   }
 
   async update(id: number, updateRecordDto: UpdateRecordDto) {
