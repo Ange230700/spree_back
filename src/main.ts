@@ -1,10 +1,23 @@
 // src\main.ts
 
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { INestApplication } from '@nestjs/common';
+import { IEntryNestModule } from '~/src/types/nest';
+import { AppModule } from '~/src/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app: INestApplication = await NestFactory.create(
+    AppModule as IEntryNestModule,
+  );
+  app.enableCors({
+    origin: process.env.FRONT_API_BASE_URL,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
   await app.listen(process.env.PORT ?? 3000);
 }
-bootstrap();
+
+bootstrap().catch((err) => {
+  console.error('💥 Bootstrap error:', err);
+  process.exit(1);
+});
