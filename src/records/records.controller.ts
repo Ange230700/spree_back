@@ -11,10 +11,19 @@ import {
   NotFoundException,
   ParseIntPipe,
 } from '@nestjs/common';
+import {
+  ApiTags,
+  ApiResponse,
+  ApiNotFoundResponse,
+  ApiBody,
+  ApiParam,
+} from '@nestjs/swagger';
+
 import { RecordsService } from '~/src/records/records.service';
 import { CreateRecordDto } from '~/src/records/dto/create-record.dto';
 import { UpdateRecordDto } from '~/src/records/dto/update-record.dto';
 
+@ApiTags('Records')
 @Controller('records')
 export class RecordsController {
   constructor(private readonly recordsService: RecordsService) {}
