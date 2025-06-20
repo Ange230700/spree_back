@@ -2,72 +2,73 @@
 
 # Spree Back
 
-<!-- > ![Project Logo](link-to-logo.png) -->
+<!-- > ![Logo du projet](lien-vers-logo.png) -->
 
-A robust, scalable, and modular backend for a modern e-commerce platform. Built with **NestJS** and **TypeScript**, Spree Back provides a fully-featured REST API that manages users, authentication, products, orders, payments, reviews, and more. Powered by **Prisma ORM** and MySQL, it supports advanced database relationships and implements best practices for maintainability, security, and developer experience.
-
----
-
-## Table of Contents
-
-- [Demo](#demo)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Running the Project](#running-the-project)
-- [Project Structure](#project-structure)
-- [API Documentation](#api-documentation)
-- [Testing](#testing)
-- [Deployment](#deployment)
-- [Environment Variables](#environment-variables)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
-- [Contact](#contact)
+Un backend robuste, évolutif et modulaire pour une plateforme e-commerce moderne. Construit avec **NestJS** et **TypeScript**, Spree Back propose une API REST complète pour gérer les utilisateurs, l’authentification, les produits, les commandes, les paiements, les avis, et plus encore. Propulsé par **Prisma ORM** et MySQL, il gère des relations avancées et applique les meilleures pratiques en termes de maintenabilité, de sécurité et d’expérience développeur.
 
 ---
 
-## Demo
+## Table des matières
 
-_No live demo yet._
+<!-- * [Démo](#démo) -->
 
-<!-- Optionally, add screenshots here if you have API playground screenshots, Swagger UI, or code samples. -->
+- [Stack Technique](#stack-technique)
+- [Démarrage](#démarrage)
+- [Lancement du projet](#lancement-du-projet)
+- [Architecture du projet](#architecture-du-projet)
+- [Documentation de l’API](#documentation-de-lapi)
+- [Tests](#tests)
+- [Déploiement](#déploiement)
+- [Variables d’environnement](#variables-denvironnement)
+- [Contribuer](#contribuer)
+- [Licence](#licence)
+  <!-- * [Remerciements](#remerciements) -->
+  <!-- * [Contact](#contact) -->
+
+<!-- ---
+
+## Démo
+
+*Aucune démo en ligne pour le moment.* -->
+
+<!-- Tu peux ajouter ici des captures d'écran de l’API, Swagger UI ou exemples de code si tu veux. -->
 
 ---
 
-## Tech Stack
+## Stack Technique
 
-**Backend:**
+**Backend :**
 
 - **NestJS** (TypeScript)
 - **Express** (via Nest)
 - **Prisma ORM**
 
-**Database:**
+**Base de données :**
 
-- **MySQL** <!-- (compatible with PostgreSQL/MongoDB if you adapt Prisma schema) -->
+- **MySQL** <!-- (compatible avec PostgreSQL/MongoDB si tu adaptes le schéma Prisma) -->
 
-**Testing:**
+**Tests :**
 
-- **Jest** (unit/e2e tests)
-- **Supertest** (API endpoint testing)
+- **Jest** (tests unitaires/e2e)
+- **Supertest** (tests des endpoints API)
 
-**Tools & Dev Experience:**
+**Outils & Expérience Dev :**
 
-- **Docker** (optional, for development & deployment)
-- **Husky** (Git hooks)
-- **Commitlint** & **Commitizen** (Conventional commits)
-- **Prettier** & **ESLint** (code quality)
-- **GitHub Actions** (CI/CD support)
+- **Docker** (optionnel, pour dev & déploiement)
+- **Husky** (hooks Git)
+- **Commitlint** & **Commitizen** (commits conventionnels)
+- **Prettier** & **ESLint** (qualité du code)
+- **GitHub Actions** (CI/CD)
 
 ---
 
-## Getting Started
+## Démarrage
 
-### Prerequisites
+### Prérequis
 
 - Node.js (>=20.x)
-- MySQL Database (or compatible)
-- Docker (optional, for containerization)
+- Base de données MySQL (ou compatible)
+- Docker (optionnel, pour la containerisation)
 
 ### Installation
 
@@ -79,22 +80,22 @@ npm install
 
 ---
 
-## Running the Project
+## Lancement du projet
 
-> **Start backend in development mode:**
+> **Démarrer le backend en mode développement :**
 
 ```bash
 npm run start:dev
 ```
 
-> **Build for production:**
+> **Construire pour la production :**
 
 ```bash
 npm run build
 npm run start:prod
 ```
 
-> **Run database migrations and seed data:**
+> **Lancer les migrations et le seed de la base de données :**
 
 ```bash
 npm run prisma:migrate:dev
@@ -103,68 +104,69 @@ npm run prisma:db:seed
 
 ---
 
-## Project Structure
+## Architecture du projet
 
 ```
 ├── src
-│   ├── main.ts          # Application entrypoint
-│   ├── app.module.ts    # Main NestJS module
-│   └── ...              # Feature modules & controllers
+│   ├── main.ts           # Point d'entrée de l’application
+│   ├── app.module.ts     # Module principal NestJS
+│   └── ...               # Modules fonctionnels et controllers
 ├── prisma
-│   ├── schema.prisma    # Prisma schema (DB models)
-│   └── main.ts          # Seeder scripts
-├── test                 # Unit and e2e tests
-├── docs                 # Project & API docs
-├── .env.sample          # Environment variable sample
-├── package.json         # NPM configuration and scripts
-└── tsconfig.json        # TypeScript configuration
+│   ├── schema.prisma     # Schéma Prisma (modèles DB)
+│   └── main.ts           # Scripts de seed
+├── test                  # Tests unitaires et e2e
+├── docs                  # Docs projet & API
+├── .env.sample           # Exemple de variables d’environnement
+├── package.json          # Config & scripts NPM
+└── tsconfig.json         # Config TypeScript
 ```
 
 ---
 
-## API Documentation
+## Documentation de l’API
 
-The backend exposes a REST API for managing:
+Le backend expose une API REST pour la gestion des :
 
-- Users, authentication (sessions, roles, refresh tokens)
-- Products, categories, sellers, shopping carts
-- Orders, order items, payments, shipments
-- Product reviews, likes
+- Utilisateurs, authentification (sessions, rôles, tokens de refresh)
+- Produits, catégories, vendeurs, paniers
+- Commandes, articles de commande, paiements, livraisons
+- Avis produits, likes
 
-**See `/docs` for OpenAPI/Swagger documentation** (or link to API reference once generated).
+**Voir `/docs` pour la documentation OpenAPI/Swagger** (ou lien vers la doc API dès qu’elle sera générée).
 
 ---
 
-## Testing
+## Tests
 
-Run the tests using:
+Lance les tests avec :
 
 ```bash
 npm test
 ```
 
-- **Unit tests**: Validate logic of individual modules.
-- **e2e tests**: Validate API endpoints and integration.
+- **Tests unitaires :** Vérifient la logique des modules individuels.
+- **Tests e2e :** Vérifient les endpoints API et l’intégration.
 
 ---
 
-## Deployment
+## Déploiement
 
-1. **Build and start in production mode:**
+1. **Build et lancement en mode production :**
 
    ```bash
    npm run build
    npm run start:prod
    ```
 
-2. **Environment variables**: Copy `.env.sample` to `.env` and configure.
-3. Optionally, deploy with Docker (add `Dockerfile` and config as needed).
+2. **Variables d’environnement :** Copie `.env.sample` vers `.env` et configure selon tes besoins.
+
+3. Déploiement Docker optionnel (ajoute un `Dockerfile` et ta config si besoin).
 
 ---
 
-## Environment Variables
+## Variables d’environnement
 
-Create a `.env` file at the project root:
+Crée un fichier `.env` à la racine du projet :
 
 ```env
 DATABASE_URL="mysql://johndoe:randompassword@localhost:3306/mydb"
@@ -174,42 +176,42 @@ FRONT_API_BASE_URL=http://localhost:3000
 
 ---
 
-## Contributing
+## Contribuer
 
-Contributions are welcome! Please follow these steps:
+Contributions bienvenues ! Merci de suivre ces étapes :
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Commit changes (`git commit -m 'feat: add your feature'`)
-4. Push the branch (`git push origin feature/your-feature`)
-5. Create a Pull Request
-
----
-
-## License
-
-UNLICENSED (or specify if you choose MIT or another license)
+1. Fork le repo
+2. Crée une nouvelle branche (`git checkout -b feature/ta-feature`)
+3. Commit tes changements (`git commit -m 'feat: ajoute ta feature'`)
+4. Push ta branche (`git push origin feature/ta-feature`)
+5. Crée une Pull Request
 
 ---
 
-## Acknowledgements
+## Licence
 
-Special thanks to the following projects and contributors:
+UNLICENSED (ou précise MIT ou une autre licence si tu préfères)
+
+---
+
+## Remerciements
+
+Un grand merci aux projets et contributeurs suivants :
 
 - [NestJS](https://nestjs.com/)
 - [Prisma](https://www.prisma.io/)
 - [Jest](https://jestjs.io/)
 
----
+<!-- ---
 
 ## Contact
 
 Ange KOUAKOU - [your.email@example.com](mailto:your.email@example.com)
 
-[Project Link](https://github.com/username/spree_back)
+[Lien vers le projet](https://github.com/username/spree_back) -->
 
----
+<!-- ---
 
-### **Summary**
+### **Résumé**
 
-This backend is a **modular e-commerce API** supporting complex business logic with clean architecture, CI/CD, and modern developer tooling. It’s ready to power production commerce or serve as a template for new SaaS projects.
+Ce backend est une **API e-commerce modulaire** qui gère une logique métier complexe avec une architecture propre, CI/CD et des outils modernes pour développeur. Prêt à propulser un projet de commerce en production ou à servir de template pour un nouveau SaaS. -->
