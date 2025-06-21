@@ -107,7 +107,7 @@ describe('RecordsController', () => {
         field_4: faker.date.recent(),
       };
       jest.spyOn(service, 'remove').mockResolvedValue(removed);
-      await expect(controller.remove(id)).resolves.toEqual(removed);
+      await expect(controller.remove(id)).resolves.toBeUndefined();
       expect(service.remove).toHaveBeenCalledWith(id);
     });
   });

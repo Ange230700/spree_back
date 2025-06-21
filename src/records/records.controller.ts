@@ -18,6 +18,7 @@ import {
   ApiResponse,
   ApiBadRequestResponse,
   ApiNotFoundResponse,
+  ApiNoContentResponse,
   ApiCreatedResponse,
   ApiParam,
   ApiBody,
@@ -35,13 +36,14 @@ export class RecordsController {
   constructor(private readonly recordsService: RecordsService) {}
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   @ApiBody({ type: CreateRecordDto })
   @ApiCreatedResponse({
     description: 'Record successfully created',
     type: CreateRecordDto,
   })
   @ApiBadRequestResponse({ description: 'Validation failed' })
-  async create(@Body() createRecordDto: CreateRecordDto): Promise<Record> {
+  create(@Body() createRecordDto: CreateRecordDto): Promise<Record> {
     return this.recordsService.create(createRecordDto);
   }
 
@@ -52,7 +54,7 @@ export class RecordsController {
     type: CreateRecordDto,
     isArray: true,
   })
-  async findAll(): Promise<Record[]> {
+  findAll(): Promise<Record[]> {
     return this.recordsService.findAll();
   }
 
@@ -90,15 +92,11 @@ export class RecordsController {
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @ApiParam({ name: 'id', type: Number, description: 'Record ID' })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Record successfully deleted',
-    type: CreateRecordDto,
-  })
+  @ApiNoContentResponse({ description: 'Record successfully deleted' })
   @ApiNotFoundResponse({ description: 'Record not found' })
-  @HttpCode(HttpStatus.OK)
-  remove(@Param('id', ParseIntPipe) id: number): Promise<Record> {
-    return this.recordsService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    await this.recordsService.remove(id);
   }
 }
