@@ -1,7 +1,7 @@
 // src\main.ts
 
 import { NestFactory } from '@nestjs/core';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 import { IEntryNestModule } from '~/src/types/nest';
@@ -10,6 +10,14 @@ import { AppModule } from '~/src/app.module';
 async function bootstrap() {
   const app: INestApplication = await NestFactory.create(
     AppModule as IEntryNestModule,
+  );
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // strip unexpected props
+      forbidNonWhitelisted: true, // error on extra props
+      transform: true, // auto-convert payloads (e.g. dates & numbers)
+    }),
   );
 
   app.enableCors({
