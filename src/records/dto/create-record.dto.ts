@@ -1,14 +1,8 @@
 // src\records\dto\create-record.dto.ts
 
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsString,
-  IsBoolean,
-  IsInt,
-  IsOptional,
-  IsDate,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsString, IsBoolean, IsInt, Min, IsOptional } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
 
 export class CreateRecordDto {
   @ApiProperty()
@@ -17,16 +11,15 @@ export class CreateRecordDto {
 
   @ApiPropertyOptional({ default: false })
   @IsOptional()
+  @Transform(({ value }) => {
+    return value === true || value === 'true';
+  })
   @IsBoolean()
-  field_2?: boolean; // optional, default is false in schema
+  field_2?: boolean;
 
-  @ApiProperty()
+  @ApiProperty({ description: 'An integer ≥ 0' })
+  @Type(() => Number)
   @IsInt()
+  @Min(0)
   field_3!: number;
-
-  @ApiPropertyOptional({ type: String, format: 'date-time' })
-  @IsOptional()
-  @Type(() => Date)
-  @IsDate()
-  field_4?: Date; // optional, default is now in schema
 }
