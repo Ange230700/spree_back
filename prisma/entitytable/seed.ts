@@ -1,11 +1,11 @@
-// prisma\entity_table\seed.ts
+// prisma\entitytable\seed.ts
 
 import prisma from '~/prisma/lib/client';
 import { faker } from '@faker-js/faker';
 import cleanUp from '~/prisma/helpers/cleanUp';
 
 async function seedEntityTable() {
-  const skipCleanup = process.env.SKIP_CLEANUP === 'false';
+  const skipCleanup = process.env.SKIP_CLEANUP === 'true';
 
   if (!skipCleanup) {
     console.log('🧹 Cleaning up…');
@@ -24,12 +24,12 @@ async function seedEntityTable() {
     field_4: faker.date.recent(),
   }));
 
-  await prisma.entity_table.createMany({
+  await prisma.entitytable.createMany({
     data: fakeTableRecords,
     skipDuplicates: true,
   });
 
-  console.log(`🎉 Seeded ${COUNT} records in entity_table.`);
+  console.log(`🎉 Seeded ${COUNT} records in entitytable.`);
 }
 
 export default seedEntityTable;

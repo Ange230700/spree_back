@@ -5,7 +5,7 @@ import deleteSafely from '~/prisma/helpers/deleteSafely';
 
 async function cleanUp() {
   console.log('🧹 Cleaning up...');
-  await deleteSafely(() => prisma.entity_table.deleteMany({}), 'entity_table');
+  await deleteSafely(() => prisma.entitytable.deleteMany({}), 'entitytable');
   console.log('🧹 Cleaning up complete.');
 }
 

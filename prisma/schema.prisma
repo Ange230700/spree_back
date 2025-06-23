@@ -267,10 +267,10 @@ enum user_role {
   admin
 }
 
-model entity_table {
-    id Int @id @default(autoincrement())
-    field_1 String
-    field_2 Boolean @default(false)
-    field_3 Int
-    field_4 DateTime @default(now())
+model entitytable {
+  id      Int      @id @default(autoincrement())
+  field_1 String
+  field_2 Boolean  @default(false)
+  field_3 Int
+  field_4 DateTime @default(now())
 }

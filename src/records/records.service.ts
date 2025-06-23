@@ -8,28 +8,28 @@ import { UpdateRecordDto } from '~/src/records/dto/update-record.dto';
 @Injectable()
 export class RecordsService {
   async create(createRecordDto: CreateRecordDto) {
-    return await prisma.entity_table.create({ data: createRecordDto });
+    return await prisma.entitytable.create({ data: createRecordDto });
   }
 
   async findAll() {
-    const records = await prisma.entity_table.findMany();
+    const records = await prisma.entitytable.findMany();
     return records;
   }
 
   async findOne(id: number) {
-    const record = await prisma.entity_table.findUnique({ where: { id } });
+    const record = await prisma.entitytable.findUnique({ where: { id } });
     return record;
   }
 
   async update(id: number, updateRecordDto: UpdateRecordDto) {
-    const record = await prisma.entity_table.findUnique({ where: { id } });
+    const record = await prisma.entitytable.findUnique({ where: { id } });
     if (!record) throw new NotFoundException(`Record with id ${id} not found`);
-    return prisma.entity_table.update({ where: { id }, data: updateRecordDto });
+    return prisma.entitytable.update({ where: { id }, data: updateRecordDto });
   }
 
   async remove(id: number) {
-    const record = await prisma.entity_table.findUnique({ where: { id } });
+    const record = await prisma.entitytable.findUnique({ where: { id } });
     if (!record) throw new NotFoundException(`Record with id ${id} not found`);
-    return prisma.entity_table.delete({ where: { id } });
+    return prisma.entitytable.delete({ where: { id } });
   }
 }

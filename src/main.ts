@@ -28,7 +28,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Records API')
-    .setDescription('CRUD for entity_table')
+    .setDescription('CRUD for entitytable')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);

@@ -20,7 +20,7 @@ describe('Records (e2e)', () => {
   });
 
   afterAll(async () => {
-    await prisma.entity_table.deleteMany({});
+    await prisma.entitytable.deleteMany({});
     await app.close();
   });
 

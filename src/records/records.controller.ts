@@ -24,7 +24,7 @@ import {
   ApiBody,
 } from '@nestjs/swagger';
 
-import type { entity_table as Record } from '@prisma/client';
+import type { entitytable as Record } from '@prisma/client';
 
 import { RecordsService } from '~/src/records/records.service';
 import { CreateRecordDto } from '~/src/records/dto/create-record.dto';

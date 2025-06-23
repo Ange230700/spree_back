@@ -1,7 +1,7 @@
 // prisma\main.ts
 
 import prisma from '~/prisma/lib/client';
-import seedEntityTable from '~/prisma/entity_table/seed';
+import seedEntityTable from '~/prisma/entitytable/seed';
 
 async function main() {
   console.log('🌱 Seeding...');
