@@ -195,11 +195,13 @@ Les contributions externes sont bienvenues ! Merci de suivre ces étapes :
 4. Push ta branche (`git push origin feat/nom-de-la-fonctionnalite`)
 5. Crée une Pull Request
 
+> **Commitizen** et **Commitlint** assurent la standardisation des messages de commit.
+
 ---
 
 ## Licence
 
-UNLICENSED (ou précise MIT ou une autre licence si tu préfères)
+UNLICENSED
 
 <!-- ---
 
@@ -219,8 +221,10 @@ Ange KOUAKOU - [your.email@example.com](mailto:your.email@example.com)
 
 [Lien vers le projet](https://github.com/username/spree_back) -->
 
----
+<!-- ---
 
 ### **Résumé**
 
-Ce backend est une **API e-commerce modulaire** qui gère une logique métier complexe avec une architecture propre, CI/CD et des outils modernes pour développeur. Prêt à propulser un projet de commerce en production ou à servir de template pour un nouveau SaaS.
+Ce backend est une **API e-commerce modulaire** qui gère une logique métier complexe avec une architecture propre, CI/CD et des outils modernes pour développeur. Prêt à propulser un projet de commerce en production ou à servir de template pour un nouveau SaaS. -->
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
