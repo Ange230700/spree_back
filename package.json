@@ -112,8 +112,8 @@
     "*.{js, ts, mjs, mts, cjs, cts}": "eslint --cache --fix"
   },
   "validate-branch-name": {
-    "pattern": "^(main|dev){1}$|^(feature|fix|test)/.+$",
-    "errorMsg": "Le nom de la branche ne respecte pas le modèle défini. Le modèle est 'main' ou 'dev' ou 'feature/nom-de-la-fonctionnalité' ou 'fix/nom-du-bug' ou 'test/nom-du-test'"
+    "pattern": "^(main|dev){1}$|^(feat|fix|test)/.+$",
+    "errorMsg": "Le nom de la branche ne respecte pas le modèle défini. Le modèle est 'main' ou 'dev' ou 'feat/nom-de-la-fonctionnalité' ou 'fix/nom-du-bug' ou 'test/nom-du-test'"
   },
   "config": {
     "commitizen": {

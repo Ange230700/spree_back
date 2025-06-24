@@ -132,7 +132,7 @@ Le backend expose une API REST pour la gestion des :
 - Commandes, articles de commande, paiements, livraisons
 - Avis produits, likes
 
-**Voir `/docs` pour la documentation OpenAPI/Swagger** (ou lien vers la doc API dès qu’elle sera générée).
+**Voir la route API `/docs` pour la documentation OpenAPI/Swagger** (ou lien vers la doc API dès qu’elle sera générée).
 
 ---
 
@@ -153,10 +153,10 @@ npm test
 
 1. **Build et lancement en mode production :**
 
-   ```bash
-   npm run build
-   npm run start:prod
-   ```
+```bash
+npm run build
+npm run start:prod
+```
 
 2. **Variables d’environnement :** Copie `.env.sample` vers `.env` et configure selon tes besoins.
 
@@ -178,12 +178,21 @@ FRONT_API_BASE_URL=http://localhost:3000
 
 ## Contribuer
 
-Contributions bienvenues ! Merci de suivre ces étapes :
+En tant que collaborateur, on peut suivre ces étapes :
+
+1. Clone le repo
+2. S'assurer que la branche `dev` est à jour (`git pull origin dev`)
+3. Créer une branche (`git checkout -b feat/nom-de-la-fonctionnalite`)
+4. Commiter les changements (`git commit -m 'feat: ajoute la fonctionnalité'` ou `npm run commit`)
+5. Pusher la branche (`git push origin feat/nom-de-la-fonctionnalite`)
+6. Créer une Pull Request
+
+Les contributions externes sont bienvenues ! Merci de suivre ces étapes :
 
 1. Fork le repo
-2. Crée une nouvelle branche (`git checkout -b feature/ta-feature`)
-3. Commit tes changements (`git commit -m 'feat: ajoute ta feature'`)
-4. Push ta branche (`git push origin feature/ta-feature`)
+2. Crée une nouvelle branche (`git checkout -b feat/nom-de-la-fonctionnalite`)
+3. Commiter les changements (`git commit -m 'feat: ajoute la fonctionnalité'`)
+4. Push ta branche (`git push origin feat/nom-de-la-fonctionnalite`)
 5. Crée une Pull Request
 
 ---
@@ -192,7 +201,7 @@ Contributions bienvenues ! Merci de suivre ces étapes :
 
 UNLICENSED (ou précise MIT ou une autre licence si tu préfères)
 
----
+<!-- ---
 
 ## Remerciements
 
@@ -200,7 +209,7 @@ Un grand merci aux projets et contributeurs suivants :
 
 - [NestJS](https://nestjs.com/)
 - [Prisma](https://www.prisma.io/)
-- [Jest](https://jestjs.io/)
+- [Jest](https://jestjs.io/) -->
 
 <!-- ---
 
@@ -210,8 +219,8 @@ Ange KOUAKOU - [your.email@example.com](mailto:your.email@example.com)
 
 [Lien vers le projet](https://github.com/username/spree_back) -->
 
-<!-- ---
+---
 
 ### **Résumé**
 
-Ce backend est une **API e-commerce modulaire** qui gère une logique métier complexe avec une architecture propre, CI/CD et des outils modernes pour développeur. Prêt à propulser un projet de commerce en production ou à servir de template pour un nouveau SaaS. -->
+Ce backend est une **API e-commerce modulaire** qui gère une logique métier complexe avec une architecture propre, CI/CD et des outils modernes pour développeur. Prêt à propulser un projet de commerce en production ou à servir de template pour un nouveau SaaS.
